@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aston University European Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a3a6c;
+      --navy-light: #e8eef7;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --text-hint: #888;
+      --bg: #fff;
+      --bg-surface: #f7f7f5;
+      --border: rgba(0,0,0,0.12);
+      --border-mid: rgba(0,0,0,0.22);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px; border-bottom: 0.5px solid var(--border);
+      background: #fff; position: sticky; top: 0; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-mark {
+      width: 36px; height: 36px; border-radius: 8px; background: var(--navy);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+    .logo-sub { font-size: 11px; color: var(--text-hint); font-weight: 300; letter-spacing: 0.5px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 13px; color: var(--text-muted); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-nav { font-size: 13px; padding: 8px 18px; border-radius: 6px; background: var(--navy); color: #fff; border: none; cursor: pointer; font-weight: 500; font-family: 'DM Sans', sans-serif; }
+    .btn-nav:hover { background: #152f5a; }
+
+    /* HERO */
+    .hero {
+      padding: 80px 48px 64px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+      border-bottom: 0.5px solid var(--border); max-width: 1100px; margin: 0 auto;
+    }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); font-weight: 500; margin-bottom: 16px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 700; line-height: 1.13; margin-bottom: 20px; }
+    .hero p { font-size: 16px; line-height: 1.8; color: var(--text-muted); margin-bottom: 32px; font-weight: 300; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { padding: 11px 24px; background: var(--navy); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+    .btn-primary:hover { background: #152f5a; }
+    .btn-outline { padding: 11px 24px; background: transparent; color: var(--text); border: 0.5px solid var(--border-mid); border-radius: 6px; font-size: 14px; font-weight: 400; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+    .btn-outline:hover { background: var(--bg-surface); }
+    .hero-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-card { background: var(--bg-surface); border-radius: var(--radius-lg); padding: 24px; border: 0.5px solid var(--border); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-weight: 300; }
+    .stat-card.wide { grid-column: span 2; background: var(--navy); }
+    .stat-card.wide .stat-num { color: #fff; }
+    .stat-card.wide .stat-label { color: rgba(255,255,255,0.65); }
+
+    /* SECTIONS */
+    section { border-bottom: 0.5px solid var(--border); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 64px 48px; }
+    .section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); font-weight: 500; margin-bottom: 10px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin-bottom: 32px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 56px; align-items: start; }
+    .about-text p { font-size: 15px; line-height: 1.85; color: var(--text-muted); margin-bottom: 16px; font-weight: 300; }
+    .pillars { display: flex; flex-direction: column; gap: 12px; }
+    .pillar { display: flex; align-items: flex-start; gap: 14px; padding: 16px; background: var(--bg-surface); border-radius: var(--radius-md); border: 0.5px solid var(--border); }
+    .pillar-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--navy-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pillar-icon svg { width: 18px; height: 18px; stroke: var(--navy); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .pillar-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+    /* EVENTS */
+    .events-empty { padding: 48px 32px; background: var(--bg-surface); border-radius: var(--radius-lg); border: 0.5px solid var(--border); text-align: center; }
+    .events-empty-icon { font-size: 32px; margin-bottom: 12px; }
+    .events-empty h3 { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+    .events-empty p { font-size: 14px; color: var(--text-muted); max-width: 360px; margin: 0 auto 20px; }
+    .events-notify { display: inline-block; padding: 9px 20px; border: 0.5px solid var(--navy); color: var(--navy); border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; }
+
+    /* COMMITTEE */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .member { background: var(--bg-surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 28px 20px; text-align: center; }
+    .avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--navy-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); }
+    .member-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .member-role { font-size: 12px; color: var(--text-muted); }
+
+    /* MEMBERSHIP */
+    .membership-intro { font-size: 15px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.75; font-weight: 300; max-width: 580px; }
+    .membership-card { border: 1.5px solid var(--navy); border-radius: 16px; padding: 36px; max-width: 480px; }
+    .plan-badge { display: inline-block; font-size: 11px; background: var(--navy); color: #fff; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; font-weight: 500; letter-spacing: 0.3px; }
+    .plan-name { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .plan-price { font-size: 40px; font-weight: 500; color: var(--navy); margin: 14px 0 4px; }
+    .plan-price span { font-size: 16px; color: var(--text-muted); font-weight: 300; }
+    .plan-where { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+    .plan-perks { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-perks li { font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .check { width: 18px; height: 18px; border-radius: 50%; background: var(--navy-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .check svg { width: 10px; height: 10px; stroke: var(--navy); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .plan-btn { width: 100%; padding: 13px; background: var(--navy); color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+    .plan-btn:hover { background: #152f5a; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .contact-info p { font-size: 15px; color: var(--text-muted); line-height: 1.8; font-weight: 300; margin-bottom: 28px; }
+    .contact-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 14px; }
+    .contact-detail svg { width: 20px; height: 20px; stroke: var(--navy); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 12px; }
+    input, textarea {
+      padding: 11px 14px; border-radius: 8px; border: 0.5px solid var(--border-mid);
+      background: var(--bg-surface); font-size: 14px; font-family: 'DM Sans', sans-serif;
+      color: var(--text); width: 100%; outline: none; transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus { border-color: var(--navy); }
+    textarea { resize: vertical; min-height: 110px; }
+    .submit-btn { padding: 12px; background: var(--navy); color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+    .submit-btn:hover { background: #152f5a; }
+
+    /* FOOTER */
+    footer { max-width: 1100px; margin: 0 auto; padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: var(--text-hint); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--text-hint); }
+    .footer-links a:hover { color: var(--text); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px; }
+      .hero h1 { font-size: 34px; }
+      .container { padding: 48px 20px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="1.2"/>
+          <path d="M2 10h16M10 2c-2 2.5-3 5-3 8s1 5.5 3 8M10 2c2 2.5 3 5 3 8s-1 5.5-3 8" stroke="#fff" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-text">Aston European Society</div>
+        <div class="logo-sub">Aston University · Birmingham</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#membership">Membership</a>
+      <a href="#committee">Committee</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="https://www.aston.ac.uk/student-life/societies" target="_blank">
+      <button class="btn-nav">Join us</button>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <div style="border-bottom: 0.5px solid rgba(0,0,0,0.12);">
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow">Aston University · Birmingham</div>
+        <h1>Your gateway to Europe</h1>
+        <p>Connecting Aston students through European politics, international affairs, culture, and career networks across Europe.</p>
+        <div class="hero-btns">
+          <a href="https://www.aston.ac.uk/student-life/societies" target="_blank">
+            <button class="btn-primary">Become a member</button>
+          </a>
+          <a href="#events">
+            <button class="btn-outline">Upcoming events</button>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="stat-card">
+          <div class="stat-num">£2</div>
+          <div class="stat-label">Membership via Aston SU</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">27</div>
+          <div class="stat-label">EU member states</div>
+        </div>
+        <div class="stat-card wide">
+          <div class="stat-num">New</div>
+          <div class="stat-label">Society launching — be one of our founding members</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">Who we are</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-title">Building bridges across Europe</div>
+          <p>The Aston University European Society is a student-led community dedicated to fostering understanding and engagement with Europe — its politics, institutions, culture, and career opportunities.</p>
+          <p>Whether you're passionate about EU policy, looking to expand your professional network, or simply love European culture, there's a place for you here. Join us as one of our founding members and help shape what we become.</p>
+        </div>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M8 11v4M12 11v4M16 11v4"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Politics & institutions</div>
+              <div class="pillar-desc">Debates, talks, and simulations of EU policy-making.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2c-2.5 3-4 6.5-4 10s1.5 7 4 10M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">International affairs</div>
+              <div class="pillar-desc">Engaging with geopolitics and global European relations.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Culture & community</div>
+              <div class="pillar-desc">Language events, cultural nights, and social gatherings.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v4M10 14h4"/></svg>
+            </div>
+            <div>
+              <div class="pillar-title">Career networks</div>
+              <div class="pillar-desc">Connecting students with European employers and institutions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="container">
+      <div class="section-label">What's on</div>
+      <div class="section-title">Upcoming events</div>
+      <div class="events-empty">
+        <div class="events-empty-icon">🗓️</div>
+        <h3>Events coming soon</h3>
+        <p>We're just getting started. Follow us on Instagram to be the first to hear about our upcoming events.</p>
+        <a href="https://www.instagram.com/astoneuropeansoc/" target="_blank">
+          <span class="events-notify">Follow @astoneuropeansoc</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section id="membership">
+    <div class="container">
+      <div class="section-label">Get involved</div>
+      <div class="section-title">Membership</div>
+      <p class="membership-intro">Joining is simple and affordable. All membership is handled through the Aston Students' Union — there are no additional fees.</p>
+      <div class="membership-card">
+        <div class="plan-badge">Society membership</div>
+        <div class="plan-name">Full membership</div>
+        <div class="plan-price">£2 <span>one-time, via Aston SU</span></div>
+        <div class="plan-where">Sign up through the Aston Students' Union website.</div>
+        <ul class="plan-perks">
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Access to all society events
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Society newsletter and updates
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Member community access
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Voting rights at society meetings
+          </li>
+          <li>
+            <div class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+            Eligible to run for committee
+          </li>
+        </ul>
+        <a href="https://www.aston.ac.uk/student-life/societies" target="_blank">
+          <button class="plan-btn">Join via Aston SU</button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMITTEE -->
+  <section id="committee">
+    <div class="container">
+      <div class="section-label">The team</div>
+      <div class="section-title">Our committee</div>
+      <div class="team-grid">
+        <div class="member">
+          <div class="avatar">VK</div>
+          <div class="member-name">Viktorija Kriaučiūnaitė</div>
+          <div class="member-role">President</div>
+        </div>
+        <div class="member">
+          <div class="avatar">GK</div>
+          <div class="member-name">Gurnika Kaur Pabla</div>
+          <div class="member-role">Vice-President</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">Get in touch</div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="section-title">Contact us</div>
+          <p>Have a question, partnership idea, or want to get involved? We'd love to hear from you.</p>
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:astoneurosoc@gmail.com">astoneurosoc@gmail.com</a>
+          </div>
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <a href="https://www.instagram.com/astoneuropeansoc/" target="_blank">@astoneuropeansoc</a>
+          </div>
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Aston University, Birmingham B4 7ET
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <input type="text" name="subject" placeholder="Subject">
+          <textarea name="message" placeholder="Your message" required></textarea>
+          <button type="submit" class="submit-btn">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">© 2025 Aston University European Society. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://www.aston.ac.uk/student-life/societies" target="_blank">Aston SU</a>
+      <a href="https://www.instagram.com/astoneuropeansoc/" target="_blank">Instagram</a>
+      <a href="mailto:astoneurosoc@gmail.com">Email us</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value;
+      const email = form.email.value;
+      const subject = form.subject.value || 'Message from website';
+      const message = form.message.value;
+      const mailto = `mailto:astoneurosoc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+      window.location.href = mailto;
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const el = document.querySelector(a.getAttribute('href'));
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
